@@ -72,17 +72,3 @@ resource "aws_route_table_association" "praveen-private-rt-association" {
   subnet_id      = each.value.id
   route_table_id = aws_route_table.praveen-rt-private.id
 }
-
-resource "aws_instance" "praveen_instance" {
-  ami                         = "ami-04a81a99f5ec58529"
-  subnet_id                   = aws_subnet.praveen_public_subnet["pb_subnet_1"].id
-  instance_type               = var.instance_type
-  associate_public_ip_address = true
-  tags = {
-    Name = "${local.praveen}_ec2"
-  }
-}
-
-output "ec2_instance_public_ip" {
-  value = aws_instance.praveen_instance.public_ip
-}
