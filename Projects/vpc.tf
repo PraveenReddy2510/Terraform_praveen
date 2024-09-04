@@ -2,14 +2,10 @@ provider "aws" {
   profile = "default"
 }
 
-locals {
-  praveen = "praveen"
-}
-
 resource "aws_vpc" "praveen_vpc" {
   cidr_block = "10.0.0.0/16"
   tags = {
-    Name = "${local.praveen}_vpc"
+    Name = "praveen_vpc"
   }
 }
 
@@ -38,7 +34,7 @@ resource "aws_internet_gateway" "praveen-IGW" {
   vpc_id = aws_vpc.praveen_vpc.id
 
   tags = {
-    Name = "${local.praveen}_IGW"
+    Name = "prvaeen_IGW"
   }
 }
 
@@ -50,7 +46,7 @@ resource "aws_route_table" "praveen-rt-public" {
   }
 
   tags = {
-    Name = "public_rt_${local.praveen}"
+    Name = "public_rt_praveen"
   }
 }
 
@@ -63,7 +59,7 @@ resource "aws_route_table_association" "praveen-public-rt-association" {
 resource "aws_route_table" "praveen-rt-private" {
   vpc_id = aws_vpc.praveen_vpc.id
   tags = {
-    Name = "private_rt_${local.praveen}"
+    Name = "private_rt_praveen"
   }
 }
 
@@ -97,3 +93,5 @@ resource "aws_vpc_security_group_egress_rule" "SG-rules" {
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = -1
 }
+
+resource
