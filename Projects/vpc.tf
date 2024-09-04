@@ -95,7 +95,7 @@ resource "aws_vpc_security_group_egress_rule" "SG-rules" {
 }
 
 resource "aws_nat_gateway" "praveen-nat-GW" {
-  subnet_id     = aws_subnet.praveen_public_subnet.id
+  subnet_id     = aws_subnet.praveen_public_subnet.[each.key]
 
   tags = {
     Name = "Praveen-NAT-Gateway"
