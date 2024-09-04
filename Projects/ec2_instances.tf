@@ -25,6 +25,7 @@ resource "aws_instance" "praveen_pb_instance" {
   instance_type               = var.instance_type
   associate_public_ip_address = true
   key_name                    = aws_key_pair.key-pair.key_name
+  user_data = file("~/shell_scripts/ubuntu.sh")
   security_groups = [
     aws_security_group.cicd-sg.id
   ]
