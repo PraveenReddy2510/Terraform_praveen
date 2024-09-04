@@ -9,6 +9,9 @@ resource "aws_instance" "praveen_instance" {
   instance_type               = var.instance_type
   associate_public_ip_address = true
   key_name = aws_key_pair.key-pair.key_name
+  security_groups = [
+    aws_security_group.cicd-sg 
+    ]
   tags = {
     Name = "${local.praveen}_ec2"
   }

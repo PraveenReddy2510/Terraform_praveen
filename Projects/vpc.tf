@@ -76,12 +76,24 @@ resource "aws_route_table_association" "praveen-private-rt-association" {
 resource "aws_security_group" "cicd-sg" {
   name = "cicd-SG"
   description = "cicd_security_group"
+  vpc_id = aws_vpc.praveen_vpc.id
+  tags = {
+    Name = "cicd_SG"
+  }
 }
 
-resource "aws_security_group_rule" "name" {
-  type = "ingress"
-  protocol = "tcp"
+resource "aws_vpc_security_group_ingress_rule" "SG-rules" {
   security_group_id = aws_security_group.cicd-sg.id
   to_port = 22
   from_port = 22
+  cidr_ipv4 = "0.0.0.0/0"
+  ip_protocol = "tcp"
+}
+
+resource "aws_vpc_security_group_egress_rule" "SG-rules" {
+  security_group_id = aws_security_group.cicd-sg.id
+  to_port = 0
+  from_port = 0
+  cidr_ipv4 = "0.0.0.0/0"
+  ip_protocol = -1
 }
