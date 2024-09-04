@@ -94,4 +94,11 @@ resource "aws_vpc_security_group_egress_rule" "SG-rules" {
   ip_protocol       = -1
 }
 
-resource
+resource "aws_nat_gateway" "praveen-nat-GW" {
+  subnet_id     = aws_subnet.praveen_public_subnet.id
+
+  tags = {
+    Name = "Praveen-NAT-Gateway"
+  }
+  depends_on = [aws_internet_gateway.praveen-IGW]
+}
