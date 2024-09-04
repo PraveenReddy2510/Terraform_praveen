@@ -72,3 +72,16 @@ resource "aws_route_table_association" "praveen-private-rt-association" {
   subnet_id      = each.value.id
   route_table_id = aws_route_table.praveen-rt-private.id
 }
+
+resource "aws_security_group" "cicd-sg" {
+  name = "cicd-SG"
+  description = "cicd_security_group"
+}
+
+resource "aws_security_group_rule" "name" {
+  type = "ingress"
+  protocol = "tcp"
+  security_group_id = aws_security_group.cicd-sg.id
+  to_port = 22
+  from_port = 22
+}

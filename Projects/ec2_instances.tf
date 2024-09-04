@@ -1,6 +1,6 @@
-resource "aws_key_pair" "name" {
+resource "aws_key_pair" "key-pair" {
   key_name = "cicd-key"
-  public_key = file("~/cicd-key.pub")
+  public_key = file("~/.ssh/cicd-key.pub")
 }
 
 resource "aws_instance" "praveen_instance" {
@@ -8,7 +8,7 @@ resource "aws_instance" "praveen_instance" {
   subnet_id                   = aws_subnet.praveen_public_subnet["pb_subnet_1"].id
   instance_type               = var.instance_type
   associate_public_ip_address = true
-  key_name = "cicd-key"
+  key_name = aws_key_pair.key-pair.key_name
   tags = {
     Name = "${local.praveen}_ec2"
   }
