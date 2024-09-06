@@ -31,7 +31,7 @@ resource "aws_instance" "praveen_pb_instance" {
     aws_security_group.cicd-sg.id
   ]
   tags = {
-    Name = "praveen_${each.key}_ec2"
+    Name = "praveen_pb_ec2"
   }
 }
 
