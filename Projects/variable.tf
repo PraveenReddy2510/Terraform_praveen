@@ -66,3 +66,8 @@ variable "private_subnet_cidr" {
     }
   }
 }
+
+variable "pr-ec2-tags" {
+  type = number
+  default = 6
+}
